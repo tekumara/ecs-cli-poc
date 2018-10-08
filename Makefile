@@ -27,6 +27,10 @@ debug:
 	@echo GIT_BRANCH=$(GIT_BRANCH)
 	@echo tag=$(tag)
 
+## Install ecs-cli (MacOS X)
+install-mac:
+	brew install amazon-ecs-cli
+
 check_var = $(foreach 1,$1,$(__check_var))
 __check_var = $(if $(value $1),,\
 	$(error Missing $1 $(if $(value 2),$(strip $2))))
