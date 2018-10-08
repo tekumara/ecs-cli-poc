@@ -27,12 +27,14 @@ debug:
 	@echo GIT_BRANCH=$(GIT_BRANCH)
 	@echo tag=$(tag)
 
-## Install ecs-cli (MacOS X)
-install-mac: /tmp/src/github.com/aws/amazon-ecs-cli
+## Install ecs-cli from source
+install-ecs-cli: /tmp/src/github.com/aws/amazon-ecs-cli
 	# we need the servicediscovery branch so build from source
-	GOPATH=$(GOPATH):/tmp && cd /tmp/src/github.com/aws/amazon-ecs-cli && git checkout servicediscovery && make
+	export GOPATH=/tmp && cd /tmp/src/github.com/aws/amazon-ecs-cli && git checkout servicediscovery && make
 	cp /tmp/src/github.com/aws/amazon-ecs-cli/bin/local/ecs-cli /usr/local/bin/ecs-cli
 
+# Install ecs-cli stable (MacOS X)
+#install-mac:
 	# latest version
 	# brew install amazon-ecs-cli
 
