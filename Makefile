@@ -18,7 +18,7 @@ help:
 
 ## Deploy antonginx service to ECS
 autonginx:
-	cd autonginx && ecs-cli compose service up
+	cd autonginx &&  ecs-cli compose service up --enable-service-discovery
 
 ## Print environment for build debugging
 debug:
@@ -28,8 +28,17 @@ debug:
 	@echo tag=$(tag)
 
 ## Install ecs-cli (MacOS X)
-install-mac:
-	brew install amazon-ecs-cli
+install-mac: /tmp/src/github.com/aws/amazon-ecs-cli
+	# we need the servicediscovery branch so build from source
+	GOPATH=$(GOPATH):/tmp && cd /tmp/src/github.com/aws/amazon-ecs-cli && git checkout servicediscovery && make
+	cp /tmp/src/github.com/aws/amazon-ecs-cli/bin/local/ecs-cli /usr/local/bin/ecs-cli
+
+	# latest version
+	# brew install amazon-ecs-cli
+
+/tmp/src/github.com/aws/amazon-ecs-cli:
+	git clone git@github.com:aws/amazon-ecs-cli.git /tmp/src/github.com/aws/amazon-ecs-cli
+
 
 check_var = $(foreach 1,$1,$(__check_var))
 __check_var = $(if $(value $1),,\
