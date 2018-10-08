@@ -1,0 +1,45 @@
+version: '2.1'
+
+services:
+  nginx:
+    image: autopilotpattern/nginx-example:${TAG:-latest}
+    mem_limit: 128m
+    restart: always
+    environment:
+      - CONSUL_AGENT=1
+      - CONSUL=consul
+    links:
+      - consul:consul
+    ports:
+      - 8080:80
+
+  backend:
+    image: autopilotpattern/nginx-backend:${TAG:-latest}
+    mem_limit: 128m
+    restart: always
+    environment:
+      - CONSUL=consul
+    links:
+      - consul:consul
+    expose:
+      - 3001
+
+
+  consul:
+    image: autopilotpattern/consul:${TAG:-latest}
+    environment:
+      - CONSUL=consul
+      - CONSUL_DEV=dev
+    command: >
+      /usr/local/bin/containerpilot
+    restart: always
+    mem_limit: 128m
+    ports:
+      - 8500:8500
+    expose:
+      - 53
+      - 8300
+      - 8301
+      - 8302
+      - 8400
+      - 8500
