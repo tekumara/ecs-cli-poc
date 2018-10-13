@@ -3,7 +3,6 @@ version: '2'
 services:
   nginx:
     image: autopilotpattern/nginx-example:branch-master
-    mem_limit: 128m
     environment:
       - CONSUL_AGENT=1
       - CONSUL=localhost
@@ -18,7 +17,6 @@ services:
 
   backend:
     image: autopilotpattern/nginx-backend:branch-master
-    mem_limit: 128m
     environment:
       - CONSUL=localhost
     ports:
@@ -38,7 +36,6 @@ services:
       - CONSUL_DEV=dev
     command: >
       /usr/local/bin/containerpilot
-    mem_limit: 128m
     ports:
       - 8500:8500
     logging:
