@@ -69,7 +69,7 @@ Bring down the service
 make down
 ```
 
-Delete the cluster stack
+Delete the cluster stack (make sure you have deleted the security group created above first)
 ```
 ecs-cli down
 ```
