@@ -1,6 +1,6 @@
 # Overview
 
-[ecs-cli](https://github.com/aws/amazon-ecs-cli). allows you to deploy and execute docker-compose style commands on an ECS cluster.
+[ecs-cli](https://github.com/aws/amazon-ecs-cli) allows you to deploy and execute docker-compose style commands on an ECS cluster.
 
 This project provides a Makefile and example application. The Makefile uses ecs-cli to create a Fargate ECS cluster including service discovery using a [private hosted zone](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html?#vpc-private-hosted-zones). 
 
